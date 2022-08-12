@@ -1,5 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../controllers/app_controller.dart';
 
 class SwitchButtonsPage extends StatefulWidget {
   String title;
@@ -51,8 +54,11 @@ class _SwitchButtonsPageState extends State<SwitchButtonsPage> {
                   onPressed: () {
                     var selectedLangages =
                         langages.where((e) => e['checked']).toList();
-                    showSnackBar(context,
-                        "${selectedLangages.length} langages selectionnés");
+                    var message =
+                        "${selectedLangages.length} langues selectionnés";
+                    context
+                        .read<AppController>()
+                        .showSnackBar(context, message);
                   },
                   child: Text('Valider'),
                 ))

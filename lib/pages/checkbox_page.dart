@@ -1,5 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:odc_flutter_features/controllers/app_controller.dart';
+import 'package:provider/provider.dart';
 
 class CheckBoxpage extends StatefulWidget {
   String title;
@@ -51,8 +53,11 @@ class _CheckBoxpageState extends State<CheckBoxpage> {
                   onPressed: () {
                     var selectedLangages =
                         langages.where((e) => e['checked']).toList();
-                    showSnackBar(context,
-                        "${selectedLangages.length} langages selectionnés");
+                    var message =
+                        "${selectedLangages.length} langages selectionnés";
+                    context
+                        .read<AppController>()
+                        .showSnackBar(context, message);
                   },
                   child: Text('Valider'),
                 ))
@@ -84,14 +89,5 @@ class _CheckBoxpageState extends State<CheckBoxpage> {
         }).toList());
   }
 
-  showSnackBar(BuildContext context, String message) {
-    final scaffold = ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(SnackBar(
-      behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height - 70),
-      content: Text("$message"),
-      action:
-          SnackBarAction(label: 'OK', onPressed: scaffold.hideCurrentSnackBar),
-    ));
-  }
+
 }

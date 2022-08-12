@@ -65,25 +65,32 @@ class _DatepickerPageState extends State<DatepickerPage> {
   }
 
   zoneDeSaisie() {
-    return TextFormField(
-      readOnly: true,
-      controller: saisieController,
-      validator: (String? val) {
-        var tempVal = val ?? "";
-        if (tempVal.isEmpty) {
-          return "Ce champ est vide";
-        }
-        return null;
+    return InkWell(
+      onTap: () {
+        ouvrirCalendrier(context);
       },
-      decoration: InputDecoration(
-          suffixIcon: IconButton(
-              onPressed: () {
-                ouvrirCalendrier(context);
-              },
-              icon: Icon(Icons.calendar_month)),
-          border: OutlineInputBorder(),
-          hintText: "Champ Obligatoire",
-          labelText: "Champs de saisie"),
+      child: IgnorePointer(
+        child: TextFormField(
+          readOnly: true,
+          controller: saisieController,
+          validator: (String? val) {
+            var tempVal = val ?? "";
+            if (tempVal.isEmpty) {
+              return "Ce champ est vide";
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+              suffixIcon: IconButton(
+                  onPressed: () {
+                    ouvrirCalendrier(context);
+                  },
+                  icon: Icon(Icons.calendar_month)),
+              border: OutlineInputBorder(),
+              hintText: "Champ Obligatoire",
+              labelText: "Champs de saisie"),
+        ),
+      ),
     );
   }
 

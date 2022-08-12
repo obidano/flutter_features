@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:odc_flutter_features/pages/home_page.dart';
+import 'package:flutter/services.dart';
+import 'package:odc_flutter_features/controllers/app_controller.dart';
+import 'package:odc_flutter_features/controllers/gallery_controller.dart';
+import 'package:odc_flutter_features/pages/splash_screen_page.dart';
+import 'package:provider/provider.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+
+import 'utils/const.dart';
 
 void main() {
-  runApp(const MyApp());
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
+  );
+  AssetPicker.registerObserve();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,22 +22,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.orange,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (BuildContext ctx) => AppController()),
+        ChangeNotifierProvider(
+            create: (BuildContext ctx) => GalleryContoller())
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.orange,
+          scaffoldBackgroundColor: Consts.DEFAULT_SCAFFOLD_BG,
+        ),
+        home: SplashScreenPage(),
       ),
-      home: HomePage(),
     );
   }
 }
