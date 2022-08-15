@@ -1,18 +1,18 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 
-class MenuLateralSousMenus extends StatefulWidget {
+class MenuLateralSousMenusPage extends StatefulWidget {
   String title;
 
-  MenuLateralSousMenus({required this.title});
+  MenuLateralSousMenusPage({required this.title});
 
   @override
-  State<MenuLateralSousMenus> createState() => _MenuLateralSousMenusState();
+  State<MenuLateralSousMenusPage> createState() => _MenuLateralSousMenusPageState();
 }
 
-class _MenuLateralSousMenusState extends State<MenuLateralSousMenus> {
+class _MenuLateralSousMenusPageState extends State<MenuLateralSousMenusPage> {
   List<String> utilisateurs =
-      List.generate(20, (index) => Faker().person.name());
+      List.generate(3, (index) => Faker().person.name());
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +82,13 @@ class _MenuLateralSousMenusState extends State<MenuLateralSousMenus> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     ListTile(
-                        leading: Icon(Icons.circle_outlined),
+                        leading: Icon(Icons.home_max),
                         title: Text('Sous menu 1')),
+                    Divider(
+                      thickness: 2,
+                    ),
                     ListTile(
-                        leading: Icon(Icons.circle_outlined),
+                        leading: Icon(Icons.ac_unit_sharp),
                         title: Text('Sous menu 2')),
                   ],
                 ),

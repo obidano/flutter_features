@@ -58,7 +58,7 @@ class _CameraImagePageState extends State<CameraImagePage> {
     var resultatImage =
         await galleryCtrl.ouvrirCameraImage(context, widget.isVideo);
     if (resultatImage != null) {
-      //selectedImage = resultatImage;
+      selectedImage = resultatImage;
       setState(() {});
     } else {
       appCtrl.showSnackBar(context, "Aucune image selectionnée", false);

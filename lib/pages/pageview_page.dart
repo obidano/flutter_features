@@ -26,36 +26,38 @@ class _PageViewPageState extends State<PageViewPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: CircleAvatar(
-              backgroundColor: Theme.of(context).primaryColor,
-              foregroundColor: Theme.of(context).primaryColor,
-              child: Text(
-                '$pageEnCours',
-                style: TextStyle(color: Colors.white),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor,
+                foregroundColor: Theme.of(context).primaryColor,
+                child: Text(
+                  '$pageEnCours',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
+        body: PageView.builder(
+            itemCount: 2,
+            controller: pageController,
+            onPageChanged: (index) {
+              pageEnCours = index + 1;
+              setState(() {});
+            },
+            itemBuilder: (context, index) {
+              if (index == 0) return tab1();
+              return tab2();
+            }),
       ),
-      body: PageView.builder(
-          itemCount: 2,
-          controller: pageController,
-          onPageChanged: (index) {
-            pageEnCours = index + 1;
-            setState(() {});
-          },
-          itemBuilder: (context, index) {
-            if (index == 0) return tab1();
-            return tab2();
-          }),
     );
   }
 

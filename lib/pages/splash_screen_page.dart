@@ -14,37 +14,39 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Center(
-          child: WidgetAnimator(
-            onIncomingAnimationComplete: finAnimation1,
-            incomingEffect: WidgetTransitionEffects.incomingSlideInFromBottom(
-                duration: Duration(milliseconds: 800)),
-            child: Container(
-              width: 100,
-              height: 100,
-              color: Colors.orange,
+    return SafeArea(
+      child: Scaffold(
+          body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+            child: WidgetAnimator(
+              onIncomingAnimationComplete: finAnimation1,
+              incomingEffect: WidgetTransitionEffects.incomingSlideInFromBottom(
+                  duration: Duration(milliseconds: 800)),
+              child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.orange,
+              ),
             ),
           ),
-        ),
-        SizedBox(
-          height: 100,
-        ),
-        if (showText)
-          WidgetAnimator(
-              onIncomingAnimationComplete: finAnimation2,
-              incomingEffect: WidgetTransitionEffects.incomingScaleDown(
-                  duration: Duration(milliseconds: 500)),
-              child: Text(
-                'ODC Flutter',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ))
-      ],
-    ));
+          SizedBox(
+            height: 100,
+          ),
+          if (showText)
+            WidgetAnimator(
+                onIncomingAnimationComplete: finAnimation2,
+                incomingEffect: WidgetTransitionEffects.incomingScaleDown(
+                    duration: Duration(milliseconds: 500)),
+                child: Text(
+                  'ODC Flutter',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ))
+        ],
+      )),
+    );
   }
 
   finAnimation1(Key? p1) async {
