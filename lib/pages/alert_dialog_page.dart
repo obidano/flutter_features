@@ -7,24 +7,22 @@ class AlertDialogPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ...example1(context),
-              ...example2(context),
-              ...example3(context),
-              ...example4(context),
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ...example1(context),
+            ...example2(context),
+            ...example3(context),
+            ...example4(context),
+          ],
         ),
       ),
     );

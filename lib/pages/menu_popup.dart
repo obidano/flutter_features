@@ -12,29 +12,27 @@ class MenuPopup extends StatefulWidget {
 
 class _MenuPopupState extends State<MenuPopup> {
   List<String> utilisateurs =
-      List.generate(20, (index) => Faker().person.name());
+      List.generate(4, (index) => Faker().person.name());
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          actions: [popupMenu()],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(child: example1(context)),
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        actions: [popupMenu()],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(child: example1(context)),
+          ],
         ),
       ),
     );

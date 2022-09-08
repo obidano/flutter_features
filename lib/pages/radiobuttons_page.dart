@@ -29,45 +29,43 @@ class _RadioButtonspageState extends State<RadioButtonspage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Quelle est la meilleure equipe du monde?',
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(child: checkBoxList()),
-              Row(children: [
-                Expanded(
-                    child: ElevatedButton(
-                  onPressed: () {
-                    if (selectedChoixe == null) {
-                      showSnackBar(context, "Veuillez faire un choix");
-                      return;
-                    }
-                    ouvrirReponseDialog(context);
-                  },
-                  child: Text('Valider'),
-                ))
-              ])
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Quelle est la meilleure equipe du monde?',
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(child: checkBoxList()),
+            Row(children: [
+              Expanded(
+                  child: ElevatedButton(
+                onPressed: () {
+                  if (selectedChoixe == null) {
+                    showSnackBar(context, "Veuillez faire un choix");
+                    return;
+                  }
+                  ouvrirReponseDialog(context);
+                },
+                child: Text('Valider'),
+              ))
+            ])
+          ],
         ),
       ),
     );

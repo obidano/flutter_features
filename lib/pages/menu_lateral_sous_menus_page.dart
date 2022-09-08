@@ -7,7 +7,8 @@ class MenuLateralSousMenusPage extends StatefulWidget {
   MenuLateralSousMenusPage({required this.title});
 
   @override
-  State<MenuLateralSousMenusPage> createState() => _MenuLateralSousMenusPageState();
+  State<MenuLateralSousMenusPage> createState() =>
+      _MenuLateralSousMenusPageState();
 }
 
 class _MenuLateralSousMenusPageState extends State<MenuLateralSousMenusPage> {
@@ -16,35 +17,33 @@ class _MenuLateralSousMenusPageState extends State<MenuLateralSousMenusPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        drawer: Drawer(
-          child: menuLateral(context),
-        ),
-        appBar: AppBar(
-          title: Text(widget.title),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          actions: [
-            IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Icon(
-                  Icons.close,
-                  size: 30,
-                ))
+    return Scaffold(
+      drawer: Drawer(
+        child: menuLateral(context),
+      ),
+      appBar: AppBar(
+        title: Text(widget.title),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        actions: [
+          IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: Icon(
+                Icons.close,
+                size: 30,
+              ))
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(child: listeUserView(context)),
           ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(child: example1(context)),
-            ],
-          ),
         ),
       ),
     );
@@ -70,10 +69,11 @@ class _MenuLateralSousMenusPageState extends State<MenuLateralSousMenusPage> {
         ),
         ExpansionTile(
           title: Text('Titre principale'),
+          leading: Icon(Icons.menu),
           initiallyExpanded: false,
           children: <Widget>[
             Container(
-              color: Colors.grey.withOpacity(.2),
+              color: Colors.white.withOpacity(.2),
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Align(
                 alignment: Alignment.topLeft,
@@ -96,11 +96,12 @@ class _MenuLateralSousMenusPageState extends State<MenuLateralSousMenusPage> {
             ),
           ],
         ),
+        ListTile(leading: Icon(Icons.menu), title: Text('Un autre titre')),
       ],
     );
   }
 
-  example1(BuildContext context) {
+  listeUserView(BuildContext context) {
     return ListView.builder(
       itemCount: utilisateurs.length,
       itemBuilder: (BuildContext context, int index) {

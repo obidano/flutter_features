@@ -18,36 +18,34 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        bottomNavigationBar: bottomNavigation(),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 20,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      bottomNavigationBar: bottomNavigation(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Center(
+                child: Container(
+              color: choixCouleursMap[selectedIndex],
+              padding: EdgeInsets.all(80),
+              child: Text(
+                'Naviguer',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               ),
-              Center(
-                  child: Container(
-                color: choixCouleursMap[selectedIndex],
-                padding: EdgeInsets.all(80),
-                child: Text(
-                  'Naviguer',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-              )),
-            ],
-          ),
+            )),
+          ],
         ),
       ),
     );

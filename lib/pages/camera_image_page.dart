@@ -80,37 +80,35 @@ class _CameraImagePageState extends State<CameraImagePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  selectedImage = null;
-                  setState(() {});
-                },
-                icon: Icon(Icons.delete))
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        actions: [
+          IconButton(
+              onPressed: () {
+                selectedImage = null;
+                setState(() {});
+              },
+              icon: Icon(Icons.delete))
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 40,
+            ),
+            if (widget.isVideo) videoPrevisuation(context),
+            if (!widget.isVideo) imagePrevisualisation(context),
+            buttonOuvrirGallery(context),
+            SizedBox(
+              height: 40,
+            )
           ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 40,
-              ),
-              if (widget.isVideo) videoPrevisuation(context),
-              if (!widget.isVideo) imagePrevisualisation(context),
-              buttonOuvrirGallery(context),
-              SizedBox(
-                height: 40,
-              )
-            ],
-          ),
         ),
       ),
     );

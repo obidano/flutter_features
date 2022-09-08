@@ -18,37 +18,35 @@ class _ValidationPageState extends State<ValidationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Spacer(),
-              formulaire(context),
-              Spacer(),
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          validerFormulaire();
-                        },
-                        child: Text('Valider')),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              )
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Spacer(),
+            formulaire(context),
+            Spacer(),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                      onPressed: () {
+                        validerFormulaire();
+                      },
+                      child: Text('Valider')),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            )
+          ],
         ),
       ),
     );

@@ -15,43 +15,38 @@ class GalleryPage extends StatefulWidget {
 }
 
 class _GalleryPageState extends State<GalleryPage> {
-  var saisieController = TextEditingController();
-  DateTime? tempChoisie;
-  var formKey = GlobalKey<FormState>();
   File? selectedImage;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  selectedImage = null;
-                  setState(() {});
-                },
-                icon: Icon(Icons.delete))
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        actions: [
+          IconButton(
+              onPressed: () {
+                selectedImage = null;
+                setState(() {});
+              },
+              icon: Icon(Icons.delete))
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 40,
+            ),
+            imagePrevisualisation(context),
+            buttonOuvrirGallery(context),
+            SizedBox(
+              height: 40,
+            )
           ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 40,
-              ),
-              imagePrevisualisation(context),
-              buttonOuvrirGallery(context),
-              SizedBox(
-                height: 40,
-              )
-            ],
-          ),
         ),
       ),
     );

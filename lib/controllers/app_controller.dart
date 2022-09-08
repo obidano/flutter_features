@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class AppController with ChangeNotifier {
   int? selectedPageIndex;
+  String title = "ODC FLutter";
 
-  AppController();
+  AppController(){
+   print('titile $title');
+  }
 
   changeSelectedPageIndex(int index) {
     selectedPageIndex = index;

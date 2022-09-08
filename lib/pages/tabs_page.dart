@@ -18,28 +18,26 @@ class _TabsPageState extends State<TabsPage> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(widget.title),
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            bottom: TabBar(
-              tabs: [
-                Tab(
-                  icon: Icon(Icons.people),
-                  text: "Joueurs",
-                ),
-                Tab(
-                  icon: Icon(Icons.sports_baseball_outlined),
-                  text: "Sports",
-                ),
-              ],
-            ),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                icon: Icon(Icons.people),
+                text: "Joueurs",
+              ),
+              Tab(
+                icon: Icon(Icons.sports_baseball_outlined),
+                text: "Sports",
+              ),
+            ],
           ),
-          body: TabBarView(
-            children: [tab1(), tab2()],
-          ),
+        ),
+        body: TabBarView(
+          children: [tab1(), tab2()],
         ),
       ),
     );

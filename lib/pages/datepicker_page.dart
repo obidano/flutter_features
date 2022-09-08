@@ -17,37 +17,35 @@ class _DatepickerPageState extends State<DatepickerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Spacer(),
-              formulaire(context),
-              Spacer(),
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          validerFormulaire();
-                        },
-                        child: Text('Valider')),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              )
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Spacer(),
+            formulaire(context),
+            Spacer(),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                      onPressed: () {
+                        validerFormulaire();
+                      },
+                      child: Text('Valider')),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            )
+          ],
         ),
       ),
     );
@@ -67,32 +65,28 @@ class _DatepickerPageState extends State<DatepickerPage> {
   }
 
   zoneDeSaisie() {
-    return InkWell(
+    return TextFormField(
       onTap: () {
         ouvrirCalendrier(context);
       },
-      child: IgnorePointer(
-        child: TextFormField(
-          readOnly: true,
-          controller: saisieController,
-          validator: (String? val) {
-            var tempVal = val ?? "";
-            if (tempVal.isEmpty) {
-              return "Ce champ est vide";
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-              suffixIcon: IconButton(
-                  onPressed: () {
-                    ouvrirCalendrier(context);
-                  },
-                  icon: Icon(Icons.calendar_month)),
-              border: OutlineInputBorder(),
-              hintText: "Champ Obligatoire",
-              labelText: "Champs de saisie"),
-        ),
-      ),
+      readOnly: true,
+      controller: saisieController,
+      validator: (String? val) {
+        var tempVal = val ?? "";
+        if (tempVal.isEmpty) {
+          return "Ce champ est vide";
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+          suffixIcon: IconButton(
+              onPressed: () {
+                ouvrirCalendrier(context);
+              },
+              icon: Icon(Icons.calendar_month)),
+          border: OutlineInputBorder(),
+          hintText: "Champ Obligatoire",
+          labelText: "Champs de saisie"),
     );
   }
 
