@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:odc_flutter_features/controllers/app_controller.dart';
 import 'package:odc_flutter_features/controllers/chat_controller.dart';
+import 'package:odc_flutter_features/controllers/socket_controller.dart';
+import 'package:odc_flutter_features/main.dart';
 import 'package:odc_flutter_features/pages/bottomsheet_page.dart';
 import 'package:odc_flutter_features/pages/calendar_page.dart';
 import 'package:odc_flutter_features/pages/camera_image_page.dart';
-import 'package:odc_flutter_features/pages/chat_page.dart';
 import 'package:odc_flutter_features/pages/checkbox_page.dart';
 import 'package:odc_flutter_features/pages/datepicker_page.dart';
 import 'package:odc_flutter_features/pages/dismissible_page.dart';
@@ -54,7 +56,7 @@ class _HomePageState extends State<HomePage> {
             )
       },
       {
-        "title": "Boite de dialogue",
+        "title": AppLocalizations.of(context)?.dialog_box,
         "navigation": (String data) => AlertDialogPage(
               title: data,
             )
@@ -192,12 +194,12 @@ class _HomePageState extends State<HomePage> {
               title: data,
             )
       },
-      {
+      /*{
         "title": "Chat Page",
         "navigation": (String data) => ChatPage(
               title: data,
             )
-      },
+      },*/
       {
         "title": "Calendar Page",
         "navigation": (String data) => CalendarPage(
@@ -214,6 +216,23 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: Icon(Icons.home),
+        actions: [
+          IconButton(
+              onPressed: () {
+                context.read<SocketController>().openSocket("Hello");
+              },
+              icon: Icon(Icons.interests)),
+          IconButton(
+              onPressed: () {
+                MyApp.setLocale(context, Locale('en'));
+              },
+              icon: Icon(Icons.flag)),
+          IconButton(
+              onPressed: () {
+                MyApp.setLocale(context, Locale('sw'));
+              },
+              icon: Icon(Icons.flag_circle))
+        ],
         title: status
             ? ListView()
             : Text(

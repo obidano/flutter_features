@@ -32,9 +32,10 @@ class CalendarController with ChangeNotifier {
   }
 
   // fonction pour test uniquement
-  loadEventData([int? month = null]) {
+  loadEventData([int? month = null, int? year=null]) {
     var final_month = month ?? DateTime.now().month;
-    String monthKey = "${kToday.year}-${final_month}";
+    var final_year = year ?? DateTime.now().year;
+    String monthKey = "${final_year}-${final_month}";
 
     // verifier si un mois n'a pas deja été chargée
     if (monthlyEvents.containsKey(monthKey)) {
@@ -45,7 +46,7 @@ class CalendarController with ChangeNotifier {
     List<Event> allMonthlyEvents = [];
     while (i < 10) {
       var date =
-          DateTime.utc(kToday.year, final_month, Random().nextInt(28) + 1);
+          DateTime.utc(final_year, final_month, Random().nextInt(28) + 1);
       List<Event> eventsByDate = [];
       var nombreEvents = Random().nextInt(5) + 1;
       int j = 0;

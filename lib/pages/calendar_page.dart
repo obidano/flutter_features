@@ -68,7 +68,7 @@ class _CalendarPageState extends State<CalendarPage> {
         backgroundColor: Colors.transparent,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -85,104 +85,112 @@ class _CalendarPageState extends State<CalendarPage> {
 
   calendrierVue(BuildContext context) {
     var controller = context.watch<CalendarController>();
-    return TableCalendar<Event>(
-      firstDay: controller.kFirstDay,
-      lastDay: controller.kLastDay,
-      focusedDay: _focusedDay,
-      calendarBuilders: CalendarBuilders(
-        markerBuilder: (BuildContext context, date, events) {
-          if (events.isEmpty) return SizedBox();
-          return Stack(
-            children: [
-              Align(
-                // alignment: Alignment.bottomLeft,
-                child: CircleAvatar(
-                  backgroundColor: Colors.deepOrangeAccent.withOpacity(.7),
-                  // maxRadius: 10,
-                  child: Text(
-                    '${date.day}',
-                    style: TextStyle(color: Colors.white),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: TableCalendar<Event>(
+        firstDay: controller.kFirstDay,
+        lastDay: controller.kLastDay,
+        focusedDay: _focusedDay,
+        calendarBuilders: CalendarBuilders(
+          markerBuilder: (BuildContext context, date, events) {
+            if (events.isEmpty) return SizedBox();
+            return Stack(
+              children: [
+                Align(
+                  // alignment: Alignment.bottomLeft,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.deepOrangeAccent.withOpacity(.7),
+                    // maxRadius: 10,
+                    child: Text(
+                      '${date.day}',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: CircleAvatar(
-                  backgroundColor: Colors.grey.withOpacity(1),
-                  maxRadius: 10,
-                  child: Text(
-                    '${events.length}',
-                    style: TextStyle(color: Colors.white),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.grey.withOpacity(1),
+                    maxRadius: 10,
+                    child: Text(
+                      '${events.length}',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                ),
-              )
-            ],
-          );
-        },
-        dowBuilder: (context, day) {
-          if (day.weekday == DateTime.sunday ||
-              day.weekday == DateTime.saturday) {
-            final text = DateFormat.E().format(day);
-
-            return Center(
-              child: Text(
-                text,
-                style: TextStyle(color: Colors.red),
-              ),
+                )
+              ],
             );
+          },
+          dowBuilder: (context, day) {
+            if (day.weekday == DateTime.sunday ||
+                day.weekday == DateTime.saturday) {
+              final text = DateFormat.E().format(day);
+
+              return Center(
+                child: Text(
+                  text,
+                  style: TextStyle(color: Colors.red),
+                ),
+              );
+            }
+          },
+        ),
+        calendarFormat: _calendarFormat,
+        eventLoader: (DateTime d) => _getEventsForDay(context, d),
+        startingDayOfWeek: StartingDayOfWeek.monday,
+        selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+        onDaySelected: _onDaySelected,
+        onFormatChanged: (format) {
+          if (_calendarFormat != format) {
+            setState(() {
+              _calendarFormat = format;
+            });
           }
         },
+        onPageChanged: (focusedDay) {
+          print("page changing ${focusedDay.toIso8601String()}");
+          _focusedDay = focusedDay;
+          context
+              .read<CalendarController>()
+              .loadEventData(focusedDay.month, focusedDay.year);
+        },
       ),
-      calendarFormat: _calendarFormat,
-      eventLoader: (DateTime d) => _getEventsForDay(context, d),
-      startingDayOfWeek: StartingDayOfWeek.monday,
-      selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-      onDaySelected: _onDaySelected,
-      onFormatChanged: (format) {
-        if (_calendarFormat != format) {
-          setState(() {
-            _calendarFormat = format;
-          });
-        }
-      },
-      onPageChanged: (focusedDay) {
-        print("page changing ${focusedDay.toIso8601String()}");
-        _focusedDay = focusedDay;
-        context.read<CalendarController>().loadEventData(focusedDay.month);
-      },
     );
   }
 
   eventsVue(BuildContext context) {
     return Expanded(
-      child: ValueListenableBuilder<List<Event>>(
-        valueListenable: _selectedEvents,
-        builder: (context, value, _) {
-          return ListView.separated(
-            separatorBuilder: (_, i) => Divider(
-              thickness: 1,
-            ),
-            itemCount: value.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 2.0,
-                  vertical: 4.0,
-                ),
-                decoration: BoxDecoration(
-                  //border: Border.all(),
-                  borderRadius: BorderRadius.circular(1.0),
-                ),
-                child: ListTile(
-                  minVerticalPadding: 2,
-                  leading: Icon(Icons.cake),
-                  onTap: () => print('${value[index]}'),
-                  title: Text('${value[index]}'),
-                ),
-              );
-            },
-          );
-        },
+      child: Container(
+        color: Colors.grey.withOpacity(.1),
+        child: ValueListenableBuilder<List<Event>>(
+          valueListenable: _selectedEvents,
+          builder: (context, value, _) {
+            return ListView.separated(
+              separatorBuilder: (_, i) => Divider(
+                thickness: 1,
+              ),
+              itemCount: value.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 2.0,
+                    vertical: 4.0,
+                  ),
+                  decoration: BoxDecoration(
+                    //border: Border.all(),
+                    borderRadius: BorderRadius.circular(1.0),
+                  ),
+                  child: ListTile(
+                    minVerticalPadding: 2,
+                    leading: Icon(Icons.cake),
+                    onTap: () => print('${value[index]}'),
+                    title: Text('${value[index]}'),
+                  ),
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
